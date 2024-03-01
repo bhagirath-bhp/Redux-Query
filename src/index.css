@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.form{
+  @apply flex flex-col w-[50%]
+}
+.form-input-container{
+  @apply flex flex-col mb-6
+}
+.form-input{
+  @apply border-white border-[1px] outline-none px-2 py-1 rounded-md
+}
+
+.navbar{
+  @apply flex justify-evenly items-center h-[10vh] w-[100vw] border-b-[1px] 
+}
+.nav-ul{
+  @apply flex
+}
+.nav-ul li{
+  @apply mx-5 cursor-pointer
+}
