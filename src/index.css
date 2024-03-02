@@ -35,7 +35,7 @@ body {
 }
 
 .navbar{
-  @apply flex justify-evenly items-center h-[10vh] w-[100vw] border-b-[1px] 
+  @apply flex justify-evenly items-center h-[10vh] w-[100vw] border-b-[1px] fixed z-30
 }
 .nav-ul{
   @apply flex

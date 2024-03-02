@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { UserBadgeProps } from "../interfaces";
+import Cookies from "js-cookie";
 
 const UserBadge: React.FC<UserBadgeProps> = () => {
     const [userCick, setUserClick] = useState(false);
@@ -31,7 +32,9 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
                             to="#"
                             className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight"
                             onClick={() => {
+                                Cookies.remove("user");
                                 window.location.replace("/")
+                                
                             }}>Sign out</Link>
                     </li>
                 </ul>

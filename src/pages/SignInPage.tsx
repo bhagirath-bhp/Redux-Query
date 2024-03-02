@@ -1,25 +1,13 @@
 import AnyForm from "../components/AnyForm";
 
-const SignUpPage = () => {
+const SignInPage = () => {
   const fields = [
-    {
-      label: "Name",
-      type: "text",
-      className: "",
-      value: "",
-    },
     {
       label: "Email",
       type: "email",
       className: "",
       value: "",
       onChange: (value: string) => console.log("Email:", value),
-    },
-    {
-      label: "Image",
-      type: "file",
-      className: "",
-      value: "",
     },
     {
       label: "Password",
@@ -31,9 +19,9 @@ const SignUpPage = () => {
   ];
   return (
     <div className="flex justify-center items-center w-[100vw]">
-      <AnyForm fields={fields} formType="signup"/>
+      <AnyForm fields={fields} formType="signin"/>
     </div>
   );
 };
 
-export default SignUpPage;
+export default SignInPage;

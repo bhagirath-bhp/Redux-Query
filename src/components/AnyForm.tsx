@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { FormProps } from "../interfaces";
 import { Button } from "@material-tailwind/react";
-import { useSignupMutation } from "../api/user";
+import { useSignupMutation, useSigninMutation } from "../api/user";
 import Cookies from "js-cookie";
 import { ErrorResponse, SuccessResponse } from "../interfaces";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { toUrlEncoded } from "../utils";
 
-const AnyForm: React.FC<FormProps> = ({ fields }) => {
+const AnyForm: React.FC<FormProps> = ({ fields, formType }) => {
   const [form, setForm] = useState<{ [key: string]: string | File }>({});
   const [signup] = useSignupMutation();
+  const [signin] = useSigninMutation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -25,37 +27,64 @@ const AnyForm: React.FC<FormProps> = ({ fields }) => {
     setIsLoading(true);
     event.preventDefault();
     const formData = new FormData();
-    for(let key in form){
-      if(form.hasOwnProperty(key)){
+    for (let key in form) {
+      if (form.hasOwnProperty(key)) {
         formData.append(key, form[key]);
       }
     }
-    setTimeout(async () => {
-      const response = (await signup(formData)) as
-        | SuccessResponse
-        | ErrorResponse;
-      if ("data" in response) {
-        setIsLoading(false);
-        const { token } = response.data;
-        Cookies.set("token", token);
-        toast.success("Signed up successfully!", {
-          position: "top-right",
-          autoClose: 1000,
-          theme: "light",
-        });
-        setTimeout(() => {
-          navigate('/')
-        }, 1000);
-      } else {
-        const { message } = response.error.data;
-        setIsLoading(false);
-        toast.error(message, {
-          position: "top-right",
-          autoClose: 1200,
-          theme: "light",
-        });
-      }
-    }, 1000);
+    if (formType === "signup") {
+      setTimeout(async () => {
+        const response = (await signup(formData)) as
+          | SuccessResponse
+          | ErrorResponse;
+        if ("data" in response) {
+          setIsLoading(false);
+          Cookies.set("user", JSON.stringify(response.data));
+          toast.success("Signed up successfully!", {
+            position: "top-right",
+            autoClose: 1000,
+            theme: "light",
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        } else {
+          const { message } = response.error.data;
+          setIsLoading(false);
+          toast.error(message, {
+            position: "top-right",
+            autoClose: 1200,
+            theme: "light",
+          });
+        }
+      }, 1000);
+    } else if (formType === "signin") {
+      setTimeout(async () => {
+        const response = (await signin(toUrlEncoded(form))) as
+          | SuccessResponse
+          | ErrorResponse;
+        if ("data" in response) {
+          setIsLoading(false);
+          Cookies.set("user", JSON.stringify(response.data));
+          toast.success("Signed in successfully!", {
+            position: "top-right",
+            autoClose: 1000,
+            theme: "light",
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        } else {
+          const { message } = response.error.data;
+          setIsLoading(false);
+          toast.error(message, {
+            position: "top-right",
+            autoClose: 1200,
+            theme: "light",
+          });
+        }
+      }, 1000);
+    }
   };
 
   return (

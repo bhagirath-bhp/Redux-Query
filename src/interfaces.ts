@@ -6,6 +6,7 @@ export interface FormField {
 }
 export interface FormProps {
   fields: FormField[];
+  formType: string;
 }
 export interface UserBadgeProps {
   name: string,
