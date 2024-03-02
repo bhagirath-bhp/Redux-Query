@@ -22,7 +22,7 @@ const SignInPage = () => {
     <div className="flex flex-col justify-center items-center w-[100vw]">
       <AnyForm fields={fields} formType="signin"/>
       <p className="my-5">
-        Not Signed In Yet? &nbsp;
+        Not Signed Up Yet? &nbsp;
         <Link to="/signup" className="text-blue underline">
           SignUp
         </Link>
