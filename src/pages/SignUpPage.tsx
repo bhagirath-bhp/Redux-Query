@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AnyForm from "../components/AnyForm";
 
 const SignUpPage = () => {
@@ -30,8 +31,14 @@ const SignUpPage = () => {
     },
   ];
   return (
-    <div className="flex justify-center items-center w-[100vw]">
-      <AnyForm fields={fields} formType="signup"/>
+    <div className="flex flex-col justify-center items-center w-[100vw]">
+      <AnyForm fields={fields} formType="signup" />
+      <p className="my-5">
+        Signed Up Already? &nbsp;
+        <Link to="/signin" className="text-blue underline">
+          SignIn
+        </Link>
+      </p>
     </div>
   );
 };
