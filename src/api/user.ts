@@ -10,6 +10,7 @@ export const userApi = createApi({
       query: (formData) => ({
         url: '/user/signup',
         method: 'POST',
+        mode: 'no-cors',
         body: formData,
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -21,6 +22,7 @@ export const userApi = createApi({
         return {
         url: '/user/signin',
         method: 'POST',
+        mode: 'no-cors',
         body: formData,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
